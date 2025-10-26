@@ -1,0 +1,42 @@
+{
+  "name": "whatschain",
+  "version": "1.0.0",
+  "description": "Sistema completo de chat do WhatsApp com interface moderna",
+  "main": "back/server.js",
+  "scripts": {
+    "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
+    "start:backend": "cd back && npm start",
+    "start:frontend": "cd front && npm run dev",
+    "install:all": "npm install && cd back && npm install && cd ../front && npm install",
+    "build": "cd front && npm run build",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "cd back && npm start",
+    "dev:frontend": "cd front && npm run dev"
+  },
+  "keywords": [
+    "whatsapp",
+    "chat",
+    "react",
+    "nodejs",
+    "socket.io",
+    "baileys",
+    "messaging"
+  ],
+  "author": "Djairo Filho",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/djairofilho/whatschain.git"
+  },
+  "bugs": {
+    "url": "https://github.com/djairofilho/whatschain/issues"
+  },
+  "homepage": "https://github.com/djairofilho/whatschain#readme",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  }
+}

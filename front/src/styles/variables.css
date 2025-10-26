@@ -1,0 +1,158 @@
+/* WhatsApp Theme Variables */
+
+:root {
+  /* Dark Theme (Default) */
+  --bg-primary: #111B21;
+  --bg-secondary: #202C33;
+  --bg-chat: #0B141A;
+  --bg-header: #202C33;
+  --bg-sidebar: #202C33;
+  
+  --bubble-sent: #005C4B;
+  --bubble-received: #202C33;
+  --bubble-sent-light: #D9FDD3;
+  --bubble-received-light: #FFFFFF;
+  
+  --text-primary: #E9EDEF;
+  --text-secondary: #8696A0;
+  --text-muted: #667781;
+  
+  --whatsapp-green: #00A884;
+  --whatsapp-green-light: #25D366;
+  
+  --border-color: #2A3942;
+  --border-light: #E9EDEF;
+  
+  --shadow: rgba(0, 0, 0, 0.3);
+  --shadow-light: rgba(0, 0, 0, 0.1);
+  
+  /* Status colors */
+  --status-sent: #8696A0;
+  --status-delivered: #8696A0;
+  --status-read: #53BDEB;
+  
+  /* Hover states */
+  --hover-bg: #2A3942;
+  --hover-bg-light: #F5F6F6;
+  
+  /* Active states */
+  --active-bg: #2A3942;
+  --active-bg-light: #E7F3FF;
+  
+  /* Input */
+  --input-bg: #2A3942;
+  --input-bg-light: #FFFFFF;
+  --input-text: #E9EDEF;
+  --input-text-light: #111B21;
+  --input-placeholder: #8696A0;
+  --input-placeholder-light: #667781;
+  
+  /* Scrollbar */
+  --scrollbar-track: #2A3942;
+  --scrollbar-thumb: #8696A0;
+  --scrollbar-thumb-hover: #E9EDEF;
+}
+
+/* Light Theme */
+[data-theme="light"] {
+  --bg-primary: #F0F2F5;
+  --bg-secondary: #FFFFFF;
+  --bg-chat: #EFEAE2;
+  --bg-header: #EDEDED;
+  --bg-sidebar: #FFFFFF;
+  
+  --bubble-sent: var(--bubble-sent-light);
+  --bubble-received: var(--bubble-received-light);
+  
+  --text-primary: #111B21;
+  --text-secondary: #667781;
+  --text-muted: #8696A0;
+  
+  --whatsapp-green: var(--whatsapp-green-light);
+  
+  --border-color: var(--border-light);
+  
+  --shadow: var(--shadow-light);
+  
+  --hover-bg: var(--hover-bg-light);
+  --active-bg: var(--active-bg-light);
+  
+  --input-bg: var(--input-bg-light);
+  --input-text: var(--input-text-light);
+  --input-placeholder: var(--input-placeholder-light);
+  
+  --scrollbar-track: #F5F6F6;
+  --scrollbar-thumb: #8696A0;
+  --scrollbar-thumb-hover: #667781;
+}
+
+/* Base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Helvetica Neue, Helvetica, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.4;
+  overflow: hidden;
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
+/* Selection */
+::selection {
+  background-color: var(--whatsapp-green);
+  color: white;
+}
+
+/* Focus styles */
+*:focus {
+  outline: 2px solid var(--whatsapp-green);
+  outline-offset: 2px;
+}
+
+/* Button reset */
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* Input reset */
+input, textarea {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* Smooth transitions */
+* {
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}

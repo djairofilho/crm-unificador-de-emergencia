@@ -1,0 +1,124 @@
+import { 
+  ArrowLeft, 
+  Phone, 
+  Video, 
+  MoreVertical,
+  Search
+} from 'lucide-react';
+import { formatPhoneNumber } from '../utils/formatters';
+
+const ChatHeader = ({ 
+  conversation, 
+  isMobile, 
+  onBack, 
+  onCall, 
+  onVideoCall 
+}) => {
+  const getInitials = (phoneNumber) => {
+    const lastTwo = phoneNumber.slice(-2);
+    return lastTwo;
+  };
+
+  const handleCall = () => {
+    if (onCall) onCall(conversation.phoneNumber);
+  };
+
+  const handleVideoCall = () => {
+    if (onVideoCall) onVideoCall(conversation.phoneNumber);
+  };
+
+  const handleSearch = () => {
+    // TODO: Implementar busca na conversa
+    console.log('Buscar na conversa');
+  };
+
+  const handleMore = () => {
+    // TODO: Implementar menu de opções
+    console.log('Menu de opções');
+  };
+
+
+
+  if (!conversation) {
+    return (
+      <div className="chat-header">
+        <div className="chat-header-left">
+          {isMobile && (
+            <button className="chat-back-btn" onClick={onBack}>
+              <ArrowLeft size={20} />
+            </button>
+          )}
+          <div className="chat-contact-info">
+            <div className="chat-contact-avatar">
+              <span>?</span>
+            </div>
+            <div>
+              <h3>Selecione uma conversa</h3>
+              <div className="chat-contact-status">Escolha um contato para começar</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="chat-header">
+      <div className="chat-header-left">
+        {isMobile && (
+          <button className="chat-back-btn" onClick={onBack}>
+            <ArrowLeft size={20} />
+          </button>
+        )}
+        
+        <div className="chat-contact-info">
+          <div className="chat-contact-avatar">
+            {getInitials(conversation.phoneNumber)}
+          </div>
+          <div>
+            <h3>{formatPhoneNumber(conversation.phoneNumber)}</h3>
+            <div className="chat-contact-status">
+              {conversation.lastMessageTime ? 'Online' : 'Última vez visto recentemente'}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="chat-header-actions">
+        <button 
+          className="chat-action-btn"
+          onClick={handleSearch}
+          title="Buscar"
+        >
+          <Search size={20} />
+        </button>
+        
+        <button 
+          className="chat-action-btn"
+          onClick={handleCall}
+          title="Ligar"
+        >
+          <Phone size={20} />
+        </button>
+        
+        <button 
+          className="chat-action-btn"
+          onClick={handleVideoCall}
+          title="Vídeo chamada"
+        >
+          <Video size={20} />
+        </button>
+        
+        <button 
+          className="chat-action-btn"
+          onClick={handleMore}
+          title="Mais opções"
+        >
+          <MoreVertical size={20} />
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default ChatHeader;
