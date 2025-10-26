@@ -87,7 +87,7 @@ const MessageInput = ({ onSendMessage, disabled }) => {
           <textarea
             ref={textareaRef}
             className="message-input"
-            placeholder="Digite uma mensagem"
+            placeholder="Digite sua resposta de emergência"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             onKeyDown={handleKeyDown}

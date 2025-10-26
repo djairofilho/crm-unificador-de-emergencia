@@ -53,8 +53,8 @@ const ChatHeader = ({
               <span>?</span>
             </div>
             <div>
-              <h3>Selecione uma conversa</h3>
-              <div className="chat-contact-status">Escolha um contato para começar</div>
+              <h3>Selecione uma emergência</h3>
+              <div className="chat-contact-status">Escolha uma emergência para atender</div>
             </div>
           </div>
         </div>
@@ -78,7 +78,7 @@ const ChatHeader = ({
           <div>
             <h3>{formatPhoneNumber(conversation.phoneNumber)}</h3>
             <div className="chat-contact-status">
-              {conversation.lastMessageTime ? 'Online' : 'Última vez visto recentemente'}
+              {conversation.lastMessageTime ? 'Emergência ativa' : 'Aguardando resposta'}
             </div>
           </div>
         </div>

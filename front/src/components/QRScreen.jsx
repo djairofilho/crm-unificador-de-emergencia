@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { MessageCircle, Smartphone, QrCode } from 'lucide-react';
+import { AlertTriangle, Smartphone, QrCode } from 'lucide-react';
 
 const QRScreen = ({ connectionState, onConnected }) => {
   const [showInstructions, setShowInstructions] = useState(false);
@@ -43,15 +43,15 @@ const QRScreen = ({ connectionState, onConnected }) => {
 
   return (
     <div className="qr-screen">
-      {/* Logo do WhatsApp */}
+      {/* Logo do Sistema de Emergência */}
       <div className="qr-logo">
-        <MessageCircle size={40} />
+        <AlertTriangle size={40} />
       </div>
 
       {/* Título */}
-      <h1 className="qr-title">WhatsApp Web</h1>
+      <h1 className="qr-title">CRM Emergência Unificada</h1>
       <p className="qr-subtitle">
-        Use o WhatsApp no seu computador
+        Sistema de atendimento de emergências
       </p>
 
       {/* Status */}
@@ -75,7 +75,7 @@ const QRScreen = ({ connectionState, onConnected }) => {
         </div>
       ) : connectionState.status === 'connected' ? (
         <div className="qr-container" style={{ 
-          backgroundColor: '#00A884', 
+          backgroundColor: 'var(--primary-color)', 
           color: 'white',
           display: 'flex',
           alignItems: 'center',
@@ -83,9 +83,9 @@ const QRScreen = ({ connectionState, onConnected }) => {
           flexDirection: 'column',
           gap: '16px'
         }}>
-          <MessageCircle size={48} />
+          <AlertTriangle size={48} />
           <div style={{ fontSize: '18px', fontWeight: '500' }}>
-            Conectado!
+            Sistema Ativo!
           </div>
           <div style={{ fontSize: '14px', opacity: 0.9 }}>
             {connectionState.phoneNumber}
@@ -96,7 +96,7 @@ const QRScreen = ({ connectionState, onConnected }) => {
           <div className="qr-loading">
             <div className="qr-spinner"></div>
             <div style={{ color: 'var(--text-secondary)', fontSize: '14px' }}>
-              Aguardando QR Code...
+              Iniciando sistema de emergência...
             </div>
           </div>
         </div>
@@ -139,8 +139,8 @@ const QRScreen = ({ connectionState, onConnected }) => {
         maxWidth: '400px'
       }}>
         <p>
-          Mantenha seu celular conectado à internet. 
-          O WhatsApp Web espelha as mensagens e chamadas do seu celular.
+          Sistema de emergência unificado ativo. 
+          Todas as chamadas de emergência serão direcionadas para este sistema.
         </p>
       </div>
     </div>

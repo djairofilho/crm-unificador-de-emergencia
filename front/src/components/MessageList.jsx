@@ -50,9 +50,9 @@ const MessageList = ({ messages, currentUser }) => {
   if (messages.length === 0) {
     return (
       <div className="empty-chat">
-        <div style={{ fontSize: '48px', marginBottom: '16px' }}>💬</div>
-        <h3>Nenhuma mensagem ainda</h3>
-        <p>Envie uma mensagem para começar a conversa</p>
+        <div style={{ fontSize: '48px', marginBottom: '16px' }}>🚨</div>
+        <h3>Nenhuma mensagem de emergência</h3>
+        <p>Aguarde chamadas de emergência ou inicie o atendimento</p>
       </div>
     );
   }

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { 
   Search, 
   MoreVertical, 
-  MessageCircle, 
+  AlertTriangle, 
   Menu,
   Plus
 } from 'lucide-react';
@@ -47,7 +47,7 @@ const Sidebar = ({ onConversationSelect, isMobile, onMenuClick }) => {
               <Menu size={20} />
             </button>
           )}
-          <h2 className="sidebar-title">Conversas</h2>
+          <h2 className="sidebar-title">Emergências</h2>
         </div>
         
         <div className="sidebar-actions">
@@ -79,7 +79,7 @@ const Sidebar = ({ onConversationSelect, isMobile, onMenuClick }) => {
           <Search size={16} color="var(--text-secondary)" />
           <input
             type="text"
-            placeholder="Buscar conversas"
+            placeholder="Buscar emergências"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             style={{
@@ -107,12 +107,12 @@ const Sidebar = ({ onConversationSelect, isMobile, onMenuClick }) => {
           ))
         ) : (
           <div className="empty-conversations">
-            <MessageCircle size={48} color="var(--text-muted)" />
-            <h3>Nenhuma conversa</h3>
+            <AlertTriangle size={48} color="var(--text-muted)" />
+            <h3>Nenhuma emergência</h3>
             <p>
               {searchQuery 
-                ? 'Nenhuma conversa encontrada para sua busca'
-                : 'Selecione um contato ou inicie uma nova conversa'
+                ? 'Nenhuma emergência encontrada para sua busca'
+                : 'Aguarde chamadas de emergência ou inicie uma nova'
               }
             </p>
           </div>

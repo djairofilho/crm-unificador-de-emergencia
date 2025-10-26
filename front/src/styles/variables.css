@@ -1,74 +1,79 @@
 /* WhatsApp Theme Variables */
 
 :root {
-  /* Dark Theme (Default) */
-  --bg-primary: #111B21;
-  --bg-secondary: #202C33;
-  --bg-chat: #0B141A;
-  --bg-header: #202C33;
-  --bg-sidebar: #202C33;
+  /* Emergency CRM Theme (Default) */
+  --bg-primary: #0D1117;
+  --bg-secondary: #1C2128;
+  --bg-chat: #0A0E13;
+  --bg-header: #1C2128;
+  --bg-sidebar: #1C2128;
   
-  --bubble-sent: #005C4B;
-  --bubble-received: #202C33;
-  --bubble-sent-light: #D9FDD3;
+  --bubble-sent: #DC2626;
+  --bubble-received: #1C2128;
+  --bubble-sent-light: #FEE2E2;
   --bubble-received-light: #FFFFFF;
   
-  --text-primary: #E9EDEF;
-  --text-secondary: #8696A0;
-  --text-muted: #667781;
+  --text-primary: #F0F6FC;
+  --text-secondary: #8B949E;
+  --text-muted: #6E7681;
   
-  --whatsapp-green: #00A884;
-  --whatsapp-green-light: #25D366;
+  --emergency-red: #DC2626;
+  --emergency-orange: #EA580C;
+  --emergency-blue: #2563EB;
+  --emergency-green: #16A34A;
   
-  --border-color: #2A3942;
-  --border-light: #E9EDEF;
+  --primary-color: var(--emergency-red);
+  --primary-color-light: #F87171;
   
-  --shadow: rgba(0, 0, 0, 0.3);
+  --border-color: #30363D;
+  --border-light: #D0D7DE;
+  
+  --shadow: rgba(0, 0, 0, 0.4);
   --shadow-light: rgba(0, 0, 0, 0.1);
   
   /* Status colors */
-  --status-sent: #8696A0;
-  --status-delivered: #8696A0;
-  --status-read: #53BDEB;
+  --status-sent: #8B949E;
+  --status-delivered: #8B949E;
+  --status-read: var(--emergency-blue);
   
   /* Hover states */
-  --hover-bg: #2A3942;
-  --hover-bg-light: #F5F6F6;
+  --hover-bg: #30363D;
+  --hover-bg-light: #F6F8FA;
   
   /* Active states */
-  --active-bg: #2A3942;
-  --active-bg-light: #E7F3FF;
+  --active-bg: #30363D;
+  --active-bg-light: #FEE2E2;
   
   /* Input */
-  --input-bg: #2A3942;
+  --input-bg: #30363D;
   --input-bg-light: #FFFFFF;
-  --input-text: #E9EDEF;
-  --input-text-light: #111B21;
-  --input-placeholder: #8696A0;
-  --input-placeholder-light: #667781;
+  --input-text: #F0F6FC;
+  --input-text-light: #0D1117;
+  --input-placeholder: #8B949E;
+  --input-placeholder-light: #6E7681;
   
   /* Scrollbar */
-  --scrollbar-track: #2A3942;
-  --scrollbar-thumb: #8696A0;
-  --scrollbar-thumb-hover: #E9EDEF;
+  --scrollbar-track: #30363D;
+  --scrollbar-thumb: #8B949E;
+  --scrollbar-thumb-hover: #F0F6FC;
 }
 
 /* Light Theme */
 [data-theme="light"] {
-  --bg-primary: #F0F2F5;
+  --bg-primary: #F6F8FA;
   --bg-secondary: #FFFFFF;
-  --bg-chat: #EFEAE2;
-  --bg-header: #EDEDED;
+  --bg-chat: #F0F6FC;
+  --bg-header: #F6F8FA;
   --bg-sidebar: #FFFFFF;
   
   --bubble-sent: var(--bubble-sent-light);
   --bubble-received: var(--bubble-received-light);
   
-  --text-primary: #111B21;
-  --text-secondary: #667781;
-  --text-muted: #8696A0;
+  --text-primary: #0D1117;
+  --text-secondary: #6E7681;
+  --text-muted: #8B949E;
   
-  --whatsapp-green: var(--whatsapp-green-light);
+  --primary-color: var(--emergency-red);
   
   --border-color: var(--border-light);
   
