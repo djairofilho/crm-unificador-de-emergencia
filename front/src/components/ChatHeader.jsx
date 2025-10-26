@@ -5,7 +5,7 @@ import {
   MoreVertical,
   Search
 } from 'lucide-react';
-import { formatPhoneNumber } from '../utils/formatters';
+import { formatPhoneNumber, extractGroupInfo, formatDisplayName } from '../utils/formatters';
 
 const ChatHeader = ({ 
   conversation, 
@@ -15,8 +15,30 @@ const ChatHeader = ({
   onVideoCall 
 }) => {
   const getInitials = (phoneNumber) => {
+    if (!phoneNumber) return '?';
     const lastTwo = phoneNumber.slice(-2);
     return lastTwo;
+  };
+
+  const getDisplayInfo = (conversation) => {
+    if (!conversation || !conversation.phoneNumber) {
+      return { name: 'Selecione uma emergência', isGroup: false };
+    }
+
+    const groupInfo = extractGroupInfo(conversation.phoneNumber);
+    if (groupInfo && groupInfo.isGroup) {
+      // Para grupos, mostrar o número do grupo formatado
+      return {
+        name: formatPhoneNumber(groupInfo.groupNumber),
+        isGroup: true,
+        groupNumber: groupInfo.groupNumber
+      };
+    }
+
+    return {
+      name: formatDisplayName(conversation.phoneNumber, false),
+      isGroup: false
+    };
   };
 
   const handleCall = () => {
@@ -38,6 +60,8 @@ const ChatHeader = ({
   };
 
 
+
+  const displayInfo = getDisplayInfo(conversation);
 
   if (!conversation) {
     return (
@@ -73,12 +97,12 @@ const ChatHeader = ({
         
         <div className="chat-contact-info">
           <div className="chat-contact-avatar">
-            {getInitials(conversation.phoneNumber)}
+            {displayInfo.isGroup ? 'GP' : getInitials(conversation.phoneNumber)}
           </div>
           <div>
-            <h3>{formatPhoneNumber(conversation.phoneNumber)}</h3>
+            <h3>{displayInfo.name}</h3>
             <div className="chat-contact-status">
-              {conversation.lastMessageTime ? 'Emergência ativa' : 'Aguardando resposta'}
+              {displayInfo.isGroup ? 'Grupo de emergência' : (conversation.lastMessageTime ? 'Emergência ativa' : 'Aguardando resposta')}
             </div>
           </div>
         </div>

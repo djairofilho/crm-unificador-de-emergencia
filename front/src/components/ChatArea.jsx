@@ -46,6 +46,7 @@ const ChatArea = ({
       <MessageList 
         messages={messages}
         currentUser="me"
+        conversationKey={selectedConversation}
       />
 
       {/* Input de Mensagem */}

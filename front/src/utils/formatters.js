@@ -144,6 +144,67 @@ export const isValidBrazilianPhone = (phoneNumber) => {
   return cleaned.length === 10 || cleaned.length === 11;
 };
 
+// Extrair informações do JID de grupo do WhatsApp
+export const extractGroupInfo = (jid) => {
+  if (!jid) return null;
+  
+  // Verificar se é um grupo (contém @g.us)
+  if (jid.includes('@g.us')) {
+    // Formato: 558589493359-1579300428@g.us
+    const groupPart = jid.replace('@g.us', '');
+    const parts = groupPart.split('-');
+    
+    if (parts.length === 2) {
+      return {
+        isGroup: true,
+        groupNumber: parts[0], // 558589493359 (número do grupo)
+        groupId: parts[1],     // 1579300428 (ID do grupo)
+        fullGroupJid: jid
+      };
+    }
+  }
+  
+  // Se não for grupo, retornar como conversa individual
+  return {
+    isGroup: false,
+    phoneNumber: jid.replace('@s.whatsapp.net', ''),
+    fullJid: jid
+  };
+};
+
+// Extrair número do remetente de mensagem de grupo
+export const extractSenderFromGroupMessage = (messageFrom) => {
+  if (!messageFrom) return null;
+  
+  // Formato: 558589493359-1579300428@g.us:5511999999999@s.whatsapp.net
+  if (messageFrom.includes('@g.us:')) {
+    const parts = messageFrom.split(':');
+    if (parts.length >= 2) {
+      const senderJid = parts[1]; // 5511999999999@s.whatsapp.net
+      return senderJid.replace('@s.whatsapp.net', ''); // 5511999999999
+    }
+  }
+  
+  // Se não for mensagem de grupo, retornar o número limpo
+  return messageFrom.replace('@s.whatsapp.net', '');
+};
+
+// Formatar nome para exibição (grupo ou contato individual)
+export const formatDisplayName = (jid, isGroup = false) => {
+  if (!jid) return 'Desconhecido';
+  
+  if (isGroup) {
+    const groupInfo = extractGroupInfo(jid);
+    if (groupInfo && groupInfo.isGroup) {
+      // Para grupos, mostrar o número do grupo formatado
+      return `Grupo ${formatPhoneNumber(groupInfo.groupNumber)}`;
+    }
+  }
+  
+  // Para contatos individuais, formatar o número
+  return formatPhoneNumber(jid.replace('@s.whatsapp.net', ''));
+};
+
 // Formatação de tamanho de arquivo
 export const formatFileSize = (bytes) => {
   if (!bytes) return '0 B';

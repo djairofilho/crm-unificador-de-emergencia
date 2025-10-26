@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import Message from './Message';
 import { formatDate, normalizeTimestamp } from '../utils/formatters';
 
-const MessageList = ({ messages, currentUser }) => {
+const MessageList = ({ messages, currentUser, conversationKey }) => {
   const messagesEndRef = useRef(null);
   const messagesContainerRef = useRef(null);
 
@@ -96,6 +96,7 @@ const MessageList = ({ messages, currentUser }) => {
                   <Message 
                     message={message} 
                     isOwn={isOwn}
+                    conversationKey={conversationKey}
                   />
                 </div>
               );

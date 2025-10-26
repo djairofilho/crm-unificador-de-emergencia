@@ -1,7 +1,7 @@
 import { Check, CheckCheck } from 'lucide-react';
-import { formatTime, normalizeTimestamp } from '../utils/formatters';
+import { formatTime, normalizeTimestamp, extractSenderFromGroupMessage, formatPhoneNumber, extractGroupInfo } from '../utils/formatters';
 
-const Message = ({ message, isOwn }) => {
+const Message = ({ message, isOwn, conversationKey }) => {
   const getStatusIcon = (status) => {
     switch (status) {
       case 'sent':
@@ -22,6 +22,28 @@ const Message = ({ message, isOwn }) => {
       hour: '2-digit', 
       minute: '2-digit' 
     });
+  };
+
+  const getSenderInfo = () => {
+    if (isOwn) return null;
+    
+    // Verificar se é uma conversa de grupo
+    const groupInfo = extractGroupInfo(conversationKey);
+    if (groupInfo && groupInfo.isGroup) {
+      // Para grupos, o message.from contém o JID completo do remetente
+      // Formato: 558589493359-1579300428@g.us:5511999999999@s.whatsapp.net
+      if (message.from && message.from.includes('@g.us:')) {
+        const senderNumber = extractSenderFromGroupMessage(message.from);
+        if (senderNumber) {
+          return {
+            isGroup: true,
+            senderNumber: formatPhoneNumber(senderNumber)
+          };
+        }
+      }
+    }
+    
+    return { isGroup: false };
   };
 
   const renderMessageContent = () => {
@@ -141,11 +163,20 @@ const Message = ({ message, isOwn }) => {
     }
   };
 
+  const senderInfo = getSenderInfo();
+
   return (
     <div 
       className={`message-bubble ${isOwn ? 'sent' : 'received'}`}
       style={{ alignSelf: isOwn ? 'flex-end' : 'flex-start' }}
     >
+      {/* Nome do remetente em grupos */}
+      {senderInfo && senderInfo.isGroup && (
+        <div className="message-sender">
+          {senderInfo.senderNumber}
+        </div>
+      )}
+      
       {renderMessageContent()}
       
       <div className="message-time">

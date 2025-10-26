@@ -142,12 +142,30 @@ async function connectToWhatsApp() {
         // Processar mensagens de outros usuários e próprias
         if (message.message) {
           const isOwnMessage = message.key.fromMe;
-          const from = isOwnMessage ? 'me' : message.key.remoteJid;
           const messageId = message.key.id;
           const timestamp = message.messageTimestamp;
           
-          // Para mensagens próprias, usar o remoteJid como destino
-          const conversationKey = isOwnMessage ? message.key.remoteJid : message.key.remoteJid;
+          // Determinar o remetente e a chave da conversa
+          let from, conversationKey;
+          
+          if (isOwnMessage) {
+            // Mensagem própria
+            from = 'me';
+            conversationKey = message.key.remoteJid;
+          } else {
+            // Mensagem recebida
+            conversationKey = message.key.remoteJid;
+            
+            // Verificar se é mensagem de grupo
+            if (message.key.remoteJid.includes('@g.us')) {
+              // Para grupos, usar o JID completo do remetente
+              // Formato: 558589493359-1579300428@g.us:5511999999999@s.whatsapp.net
+              from = message.key.remoteJid;
+            } else {
+              // Para conversas individuais
+              from = message.key.remoteJid;
+            }
+          }
           
           // Extrair texto da mensagem (suporta diferentes tipos)
           let text = '';
@@ -203,6 +221,8 @@ async function connectToWhatsApp() {
           }
           
           console.log('É mensagem própria:', isOwnMessage);
+          console.log('Remetente (from):', from);
+          console.log('Chave da conversa:', conversationKey);
           console.log('Tipo da mensagem:', messageType);
           console.log('Texto extraído:', text);
           console.log('Dados de mídia:', mediaData);

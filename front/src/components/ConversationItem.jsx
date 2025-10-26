@@ -1,4 +1,4 @@
-import { formatTime, formatPhoneNumber } from '../utils/formatters';
+import { formatTime, formatPhoneNumber, extractGroupInfo, formatDisplayName } from '../utils/formatters';
 
 const ConversationItem = ({ 
   conversation, 
@@ -10,9 +10,28 @@ const ConversationItem = ({
   };
 
   const getInitials = (phoneNumber) => {
+    if (!phoneNumber) return '?';
+    
+    const groupInfo = extractGroupInfo(phoneNumber);
+    if (groupInfo && groupInfo.isGroup) {
+      return 'GP'; // Grupo
+    }
+    
     // Extrair os últimos 2 dígitos do número
     const lastTwo = phoneNumber.slice(-2);
     return lastTwo;
+  };
+
+  const getDisplayName = (phoneNumber) => {
+    if (!phoneNumber) return 'Desconhecido';
+    
+    const groupInfo = extractGroupInfo(phoneNumber);
+    if (groupInfo && groupInfo.isGroup) {
+      // Para grupos, mostrar o número do grupo formatado
+      return formatPhoneNumber(groupInfo.groupNumber);
+    }
+    
+    return formatDisplayName(phoneNumber, false);
   };
 
   const formatLastMessage = (message) => {
@@ -38,7 +57,7 @@ const ConversationItem = ({
         {/* Header com nome e horário */}
         <div className="conversation-header">
           <div className="conversation-name">
-            {formatPhoneNumber(conversation.phoneNumber)}
+            {getDisplayName(conversation.phoneNumber)}
           </div>
           <div className="conversation-time">
             {formatTime(conversation.lastMessageTime)}
